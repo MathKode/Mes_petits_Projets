@@ -77,6 +77,7 @@ while game:
             if event.key == pygame.K_s:
                 x=player.rect1.x + 17
                 y=player.rect1.y + 2
+                y=height-y
                 print(f"Point n°{len(ls)+1}: ",x,y)
                 ls.append([str(len(ls)+1),str(x),str(y)])
             if event.key == pygame.K_q:
