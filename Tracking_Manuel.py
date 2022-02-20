@@ -1,6 +1,7 @@
 #Coded by BiMathAx
 from moviepy.editor import *
 from PIL import Image
+from math import sqrt
 import pygame
 
 pygame.init()
@@ -9,7 +10,7 @@ FPS = 20
 
 name=str(input("Nom du fichier video avec extension : "))
 pas=float(input("Pas (duré en seconde entre 2 image virgule avec un .) : "))
-print("--------\nSqueeze P to change of picture,\n L to going back (last picture),\n S to save the point of cursor,\n Q to quit\n--------")
+print("--------\nSqueeze P to change of picture,\n L to going back (last picture),\n S to save the point of cursor,\n T to create a segment (close with another T press),\n Q to quit\n--------")
 #Load
 try:
     clip1 = VideoFileClip(name)
@@ -50,11 +51,13 @@ def load_picture(time, video):
     return img
 
 ls=[]
+courbe=[]
 game=True
 player=curseur()
 time = 0
 image=load_picture(time,clip1)
 move_ls=[0,0]
+trait=0
 while game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -82,12 +85,32 @@ while game:
                 ls.append([str(len(ls)+1),str(x),str(y)])
             if event.key == pygame.K_q:
                 file=open("Result-TRACKING.csv","w")
-                file.write("Point;X (abscisse);Y (ordonné)")
+                file.write(f"Point;X (abscisse);Y (ordonné);;PAS de {pas}s")
                 for i in ls:
-                    file.write(";".join(ls))
-                file.close
+                    file.write("\n"+";".join(i))
+                file.write("\n\nSegment;Longueur (en pixel)")
+                for i in courbe:
+                    file.write("\n"+";".join(i))
+                file.close()
                 print("----- END -----\n\nResult save in Result-TRACKING.csv")
                 game=False
+            if event.key == pygame.K_t:
+                #Calcule la longueur d'un segment
+                #Storage in courbe=[]
+                if trait == 0:
+                    xp=player.rect1.x + 17
+                    yp=player.rect1.y + 2
+                    yp=height-yp
+                    trait=1
+                else:
+                    trait=0
+                    x=player.rect1.x + 17
+                    y=player.rect1.y + 2
+                    y=height-y
+                    longueur_segment=sqrt((xp-x)**2+(yp-y)**2)
+                    print(f"Trait n°{len(courbe)+1}: ",longueur_segment,"pixel")
+                    courbe.append([str(len(courbe)+1),str(longueur_segment)])
+
         if event.type == pygame.KEYUP:
             move_ls=[0,0]
     player.move(move_ls)
