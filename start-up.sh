@@ -18,6 +18,7 @@ pip install pygame
 pip install argparse
 pip install sockets
 pip install numpy
+pip install selenium
 sudo apt install gcc -y
 sudo apt install rsync -y
 sudo apt install nsnake -y
