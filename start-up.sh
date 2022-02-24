@@ -26,6 +26,7 @@ sudo apt install cmatrix -y
 sudo apt install git -y
 sudo apt install tee -y
 sudo apt install samba -y
+sudo apt install apache2 -y
 #ASCIIquarium
 sudo apt install libcurses-perl -y
 sudo cpan Term::Animation
