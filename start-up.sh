@@ -27,6 +27,7 @@ sudo apt install git -y
 sudo apt install tee -y
 sudo apt install samba -y
 sudo apt install apache2 -y
+sudo apt install gnupg -y
 #ASCIIquarium
 sudo apt install libcurses-perl -y
 sudo cpan Term::Animation
