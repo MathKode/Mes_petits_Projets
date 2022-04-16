@@ -23,6 +23,7 @@ pip install requests
 pip install jsonlib
 pip install bs4
 pip install pybase64
+pip install django
 sudo apt install gcc -y
 sudo apt install rsync -y
 sudo apt install nsnake -y
